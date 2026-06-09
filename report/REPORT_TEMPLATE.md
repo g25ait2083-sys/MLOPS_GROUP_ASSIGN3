@@ -26,7 +26,7 @@
 | GitHub repository         | https://github.com/g25ait2083-sys/MLOPS_GROUP_ASSIGN3        |
 | Kaggle notebook — V1      | `<public link>`                                              |
 | Kaggle notebook — V2      | `<public link>`                                              |
-| Hugging Face model        | `https://huggingface.co/<username>/distilbert-emotion-mlops-a3` |
+| Hugging Face model        | https://huggingface.co/g25ait2046/distilbert-emotion-mlops-a3 |
 | Docker image              | `https://hub.docker.com/r/<dockerhub>/mlops-a3-emotion`      |
 | W&B project dashboard     | `https://wandb.ai/<entity>/mlops-assignment3`                |
 
@@ -113,14 +113,11 @@ names rather than `LABEL_0…LABEL_5`. (≈130 words)
 
 | Metric (held-out test)| Version 1 | Version 2 |
 | --------------------- | --------- | --------- |
-| Accuracy              | `<v1>`    | `<v2>`    |
-| Weighted F1           | `<v1>`    | `<v2>`    |
-| Validation loss       | `<v1>`    | `<v2>`    |
+| Accuracy              | 92.7%     | 92.5%     |
+| Weighted F1           | 0.9271    | 0.9245    |
+| Test loss             | 0.3283    | 0.3056    |
 
-**Which performed better and why:** `<state the winner and your reasoning — e.g.
-"V2's larger batch + higher LR converged faster and generalised slightly better,
-while weight decay reduced overfitting on the dominant classes," or the opposite
-if V1 won. Reference the W&B curves.>`
+**Which performed better and why:** Version 1 is the best model overall — it achieved higher accuracy (92.7% vs 92.5%) and weighted F1 (0.9271 vs 0.9245) despite a slightly higher test loss. V1 used a smaller learning rate (3e-5) and smaller batch (16), which provided more frequent weight updates and smoother convergence over 3 epochs. V2's larger batch (32) and higher LR (5e-5) with weight decay (0.01) reduced test loss marginally but did not improve generalisation on accuracy or F1, suggesting the regularisation may have under-fit the minority classes (e.g. `surprise` at 3.6% of training data).
 
 **Screenshot 3 — W&B dashboard showing both runs:** `<paste Runs comparison table
 with accuracy / F1 / loss side by side>`
