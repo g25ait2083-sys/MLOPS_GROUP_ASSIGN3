@@ -24,11 +24,11 @@
 | Component                 | URL                                                          |
 | ------------------------- | ------------------------------------------------------------ |
 | GitHub repository         | https://github.com/g25ait2083-sys/MLOPS_GROUP_ASSIGN3        |
-| Kaggle notebook — V1      | `<public link>`                                              |
-| Kaggle notebook — V2      | `<public link>`                                              |
+| Kaggle notebook — V1      | https://www.kaggle.com/code/g25ait2046/notebook72b692c7fd    |
+| Kaggle notebook — V2      | https://www.kaggle.com/code/g25ait2046/notebook72b692c7fd    |
 | Hugging Face model        | https://huggingface.co/g25ait2046/distilbert-emotion-mlops-a3 |
 | Docker image              | `https://hub.docker.com/r/<dockerhub>/mlops-a3-emotion`      |
-| W&B project dashboard     | `https://wandb.ai/<entity>/mlops-assignment3`                |
+| W&B project dashboard     | https://wandb.ai/g25ait2046-iitjodhpur/mlops-assignment3     |
 
 ## 3. Git repository setup (Task 1)
 

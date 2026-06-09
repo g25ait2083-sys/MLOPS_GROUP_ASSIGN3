@@ -60,11 +60,11 @@ GitHub Actions for CI + on-demand inference.
 > ⚠️ Broken or private links score zero for that component.
 
 - **GitHub Repository:** https://github.com/g25ait2083-sys/MLOPS_GROUP_ASSIGN3
-- **Kaggle Notebook — Version 1:** `<paste public link>`
-- **Kaggle Notebook — Version 2:** `<paste public link>` (can be the same notebook with both runs, or a second notebook)
-- **Hugging Face Model:** `https://huggingface.co/<your-username>/distilbert-emotion-mlops-a3`
+- **Kaggle Notebook — Version 1:** https://www.kaggle.com/code/g25ait2046/notebook72b692c7fd
+- **Kaggle Notebook — Version 2:** https://www.kaggle.com/code/g25ait2046/notebook72b692c7fd (same notebook, both runs)
+- **Hugging Face Model:** https://huggingface.co/g25ait2046/distilbert-emotion-mlops-a3
 - **Docker Image:** `https://hub.docker.com/r/<your-dockerhub>/mlops-a3-emotion`
-- **W&B Project Dashboard:** `https://wandb.ai/<your-entity>/mlops-assignment3`
+- **W&B Project Dashboard:** https://wandb.ai/g25ait2046-iitjodhpur/mlops-assignment3
 
 ---
 
@@ -158,21 +158,21 @@ Broken or private links score zero in the report.
 ### Kaggle notebooks (set to Public)
 | What | Link |
 | ---- | ---- |
-| Notebook — Version 1 (run-v1) | `<paste public Kaggle link>` |
-| Notebook — Version 2 (run-v2) | `<paste public Kaggle link>` |
+| Notebook — Version 1 (run-v1) | https://www.kaggle.com/code/g25ait2046/notebook72b692c7fd |
+| Notebook — Version 2 (run-v2) | https://www.kaggle.com/code/g25ait2046/notebook72b692c7fd |
 
 ### Hugging Face
 | What | Link |
 | ---- | ---- |
-| Fine-tuned model (push your own) | `https://huggingface.co/<your-username>/distilbert-emotion-mlops-a3` |
+| Fine-tuned model (push your own) | https://huggingface.co/g25ait2046/distilbert-emotion-mlops-a3 |
 | Base model used | https://huggingface.co/distilbert-base-uncased |
 | Dataset used | https://huggingface.co/datasets/dair-ai/emotion |
 
 ### Weights & Biases (set project to Public)
 | What | Link |
 | ---- | ---- |
-| W&B project dashboard | `https://wandb.ai/<your-entity>/mlops-assignment3` |
-| Runs comparison (v1 vs v2) | `<paste W&B comparison view link>` |
+| W&B project dashboard | https://wandb.ai/g25ait2046-iitjodhpur/mlops-assignment3 |
+| Runs comparison (v1 vs v2) | https://wandb.ai/g25ait2046-iitjodhpur/mlops-assignment3 |
 
 ### Docker
 | What | Link |
