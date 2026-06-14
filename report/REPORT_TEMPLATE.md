@@ -11,10 +11,10 @@
 
 | Roll No.        | Name               | Contribution                                                                 |
 | --------------- | ------------------ | ---------------------------------------------------------------------------- |
-| G25ait2083      | `<name>`           | Repo admin & branch protection, W&B project setup                            |
-| **G25ait2046**  | **Kanwaldeep Singh** (g25ait2046@iitj.ac.in) | Data prep & normalisation (Task 2), model loading (Task 3), inference script + Dockerfile (Task 6), CI & inference GitHub Actions (Task 7) |
-| `<roll>`        | `<name>`           | Kaggle training runs & W&B logging (Task 4), HF model push (Task 5)          |
-| `<roll>`        | `<name>`           | Report, README, experiment comparison & analysis                            |
+| G25ait2083      | **Rashmi Kumari**  | Repo admin, branch protection, CI/CD triggering, Hugging Face model registry, report (Task 1, 5, 7) |
+| **G25ait2046**  | **Kanwaldeep Singh** (g25ait2046@iitj.ac.in) | Data prep & normalisation, model loading, inference script + Dockerfile, report (Task 2, 3, 6) |
+| G25AIT2031      | **Disha Singhania**| Kaggle training runs co-authoring & execution, W&B logging & dashboard setup, release merging, GitHub Actions workflow execution, report (Task 4, 8, 7) |
+| G25AIT2005      | **Abhishek Virmani**| Not Present                                                                  |
 
 > Every member must have commits in the GitHub history. Confirm under
 > *Insights → Contributors* before submitting.
@@ -27,8 +27,8 @@
 | Kaggle notebook — V1      | https://www.kaggle.com/code/g25ait2046/notebook72b692c7fd    |
 | Kaggle notebook — V2      | https://www.kaggle.com/code/g25ait2046/notebook72b692c7fd    |
 | Hugging Face model        | https://huggingface.co/g25ait2046/distilbert-emotion-mlops-a3 |
-| Docker image              | `https://hub.docker.com/r/<dockerhub>/mlops-a3-emotion`      |
-| W&B project dashboard     | https://wandb.ai/g25ait2046-iitjodhpur/mlops-assignment3     |
+| Docker image              | https://hub.docker.com/r/rashmi2083/mlops-emotion-inference  |
+| W&B project dashboard     | https://wandb.ai/g25ait2083-iit/mlops-assignment3            |
 
 ## 3. Git repository setup (Task 1)
 
@@ -36,6 +36,7 @@
 - `main` protected — at least 1 PR review required to merge; `develop` is the
   integration branch.
 - Owner is Admin; all teammates added as Collaborators with **Write** access.
+- **Branch Integration & Release Process:** To maintain repository integrity, all feature development took place on dedicated branches. Code was integrated and verified on the `develop` branch. Final release deployment to `main` was controlled via a GitHub Pull Request, requiring a mandatory review approval and passing CI status checks before merging, ensuring no unverified code reached production.
 
 **Screenshot 1 — Collaborators & roles:** `<paste Settings → Collaborators>`
 **Screenshot 2 — Branch protection on `main`:** `<paste Settings → Branches>`
@@ -113,11 +114,11 @@ names rather than `LABEL_0…LABEL_5`. (≈130 words)
 
 | Metric (held-out test)| Version 1 | Version 2 |
 | --------------------- | --------- | --------- |
-| Accuracy              | 92.7%     | 92.5%     |
-| Weighted F1           | 0.9271    | 0.9245    |
-| Test loss             | 0.3283    | 0.3056    |
+| Accuracy              | 92.95%    | 92.50%    |
+| Weighted F1           | 0.9300    | 0.9245    |
+| Test loss             | 0.3034    | 0.3056    |
 
-**Which performed better and why:** Version 1 is the best model overall — it achieved higher accuracy (92.7% vs 92.5%) and weighted F1 (0.9271 vs 0.9245) despite a slightly higher test loss. V1 used a smaller learning rate (3e-5) and smaller batch (16), which provided more frequent weight updates and smoother convergence over 3 epochs. V2's larger batch (32) and higher LR (5e-5) with weight decay (0.01) reduced test loss marginally but did not improve generalisation on accuracy or F1, suggesting the regularisation may have under-fit the minority classes (e.g. `surprise` at 3.6% of training data).
+**Which performed better and why:** Version 1 is the best model overall — it achieved higher accuracy (92.95% vs 92.50%) and weighted F1 (0.9300 vs 0.9245) despite a slightly lower test loss. V1 used a smaller learning rate (3e-5) and smaller batch (16), which provided more frequent weight updates and smoother convergence over 3 epochs. V2's larger batch (32) and higher LR (5e-5) with weight decay (0.01) reduced test loss marginally but did not improve generalisation on accuracy or F1, suggesting the regularisation may have under-fit the minority classes (e.g. `surprise` at 3.6% of training data).
 
 **Screenshot 3 — W&B dashboard showing both runs:** `<paste Runs comparison table
 with accuracy / F1 / loss side by side>`
@@ -132,9 +133,9 @@ with accuracy / F1 / loss side by side>`
 - Runs as a **non-root** user; `INPUT_TEXT` supplied at run time.
 
 ```bash
-docker build --build-arg HF_MODEL_NAME=<username>/distilbert-emotion-mlops-a3 -t mlops-a3-emotion:latest .
-docker run --rm -e INPUT_TEXT="I am thrilled about the results!" mlops-a3-emotion:latest
-docker push <dockerhub>/mlops-a3-emotion:latest
+docker build -t rashmi2083/mlops-emotion-inference:latest .
+docker run --rm -e HF_TOKEN=<token> -e INPUT_TEXT="I am so happy!" rashmi2083/mlops-emotion-inference:latest
+docker push rashmi2083/mlops-emotion-inference:latest
 ```
 
 **Screenshot 4 — successful GitHub Actions inference run (badge or log):**
@@ -142,10 +143,17 @@ docker push <dockerhub>/mlops-a3-emotion:latest
 
 ## 8. Challenges & learnings
 
-- `<e.g. wiring Kaggle Secrets + W&B + HF login without leaking tokens>`
-- `<e.g. keeping the Docker image small by using CPU torch>`
-- `<e.g. interpreting the W&B comparison; class imbalance hurting the rare
-  "surprise" class>`
-- **What we'd do differently:** `<e.g. add class weights / oversampling, sweep
-  hyperparameters with a W&B Sweep, change one knob at a time for cleaner
-  attribution>`
+- **WSL 2 and Docker setup:** Docker Desktop failed to start on Windows 11 until WSL 2 was installed via `wsl --install`.
+- **W&B version conflict:** `wandb==0.17.0` was incompatible with Kaggle's Python 3.12 environment; resolved by removing the version pin.
+- **NumPy 2.x compatibility issues:** GitHub Actions runner had `numpy>=2` which broke PyTorch; fixed by pinning `numpy<2` (specifically `numpy==1.26.4`) in `requirements.txt`.
+- **File structure errors:** Files were accidentally created inside `src/` instead of the repository root; resolved by reorganizing paths.
+- **Class imbalance:** The `surprise` emotion is only 3.6% of training data, making it the most difficult class to predict accurately.
+
+- **What we'd do differently:**
+  - Add class weights or oversampling for the minority `surprise` class to improve per-class F1 score.
+  - Change only one hyperparameter at a time between experiment versions for cleaner attribution of performance differences.
+  - Use W&B Sweeps for systematic hyperparameter search instead of manual validation.
+
+## 9. Conclusion
+
+Our team successfully built and verified an end-to-end production-grade MLOps pipeline. By fine-tuning DistilBERT on the emotion dataset, containerizing the model in Docker, and automating testing via GitHub Actions, we established a reproducible workflow where all performance runs are transparently tracked and compared on Weights & Biases.
