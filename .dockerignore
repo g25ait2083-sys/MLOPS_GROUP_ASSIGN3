@@ -1,0 +1,21 @@
+# Keep the build context tiny — only src/ and requirements.txt are needed.
+.git/
+.github/
+.venv/
+venv/
+__pycache__/
+*.pyc
+data/
+notebooks/
+report/
+results/
+checkpoints/
+wandb/
+*.parquet
+*.csv
+.ipynb_checkpoints/
+*.md
+!requirements.txt
+.env
+*.key
+kaggle.json

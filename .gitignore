@@ -1,0 +1,52 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# ---- Virtual environments ----
+.venv/
+venv/
+env/
+.python-version
+
+# ---- Prepared data & model artefacts (DO NOT commit large files) ----
+data/prepared/
+data/raw/
+*.parquet
+*.csv
+*.arrow
+results/
+checkpoints/
+*.bin
+*.safetensors
+*.pt
+
+# Keep the committed label mapping
+!data/id2label.json
+
+# ---- Experiment tracking / caches ----
+wandb/
+.cache/
+~/.cache/huggingface/
+.huggingface/
+
+# ---- Notebooks ----
+.ipynb_checkpoints/
+
+# ---- IDE / OS ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ---- Secrets (never commit tokens) ----
+.env
+*.key
+kaggle.json
+
+notebooks/pulled/

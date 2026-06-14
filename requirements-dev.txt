@@ -1,0 +1,12 @@
+# Extra dependencies needed only for data preparation and training.
+# Install alongside requirements.txt for local dev:
+#   pip install -r requirements.txt -r requirements-dev.txt
+# On Kaggle most of these are pre-installed; the notebook pins what it needs.
+# Updated for Python 3.14 compatibility.
+datasets==5.0.0
+scikit-learn==1.9.0
+wandb==0.27.2
+accelerate==1.13.0
+pandas==3.0.3
+pyarrow==24.0.0
+flake8==7.3.0
