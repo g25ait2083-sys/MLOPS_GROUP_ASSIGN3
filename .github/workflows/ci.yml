@@ -1,3 +1,5 @@
+# Task 7.1 — Continuous Integration: lint the source on every push to develop
+# and on pull requests targeting main. No training happens here (that is Kaggle).
 name: CI
 
 on:
@@ -8,16 +10,20 @@ on:
 
 jobs:
   lint:
+    name: flake8 lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt flake8
+      - name: Install flake8
+        run: pip install flake8==7.0.0
 
-      - name: Run flake8 linter
-        run: flake8 src/ --max-line-length=120 --ignore=E302,E305,E401,E128,F401
+      - name: Lint src/
+        run: flake8 src/ --max-line-length=120 --statistics

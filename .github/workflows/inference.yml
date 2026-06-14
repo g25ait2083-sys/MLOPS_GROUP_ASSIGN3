@@ -1,3 +1,5 @@
+# Task 7.2 — On-demand inference. Manually triggered from the Actions tab; loads
+# the model from the Hugging Face Hub and classifies the text you supply.
 name: Inference
 
 on:
@@ -6,22 +8,37 @@ on:
       input_text:
         description: 'Text to classify'
         required: true
+        default: "I can't believe how happy this made me!"
+      hf_model_name:
+        description: 'HF model repo (leave blank to use the script default)'
+        required: false
+        default: ''
 
 jobs:
   infer:
+    name: Classify emotion
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+      - name: Install inference dependencies (CPU torch)
+        run: |
+          pip install --no-cache-dir torch==2.2.2 --index-url https://download.pytorch.org/whl/cpu
+          pip install --no-cache-dir -r requirements.txt
 
       - name: Run inference
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           INPUT_TEXT: ${{ github.event.inputs.input_text }}
-        run: python src/inference.py
+          HF_MODEL_NAME: ${{ github.event.inputs.hf_model_name }}
+        run: |
+          # Fall back to the script's built-in default if no model was supplied.
+          if [ -z "$HF_MODEL_NAME" ]; then unset HF_MODEL_NAME; fi
+          python src/inference.py

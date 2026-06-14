@@ -1,9 +1,8 @@
-transformers==4.41.0
-datasets==2.19.0
-torch==2.2.0
-scikit-learn==1.4.2
-wandb
-huggingface_hub
-accelerate>=0.34.0
-evaluate==0.4.1
-numpy<2
+# Runtime / inference dependencies only.
+# Used by: the Docker image, the GitHub Actions CI lint job, and the
+# inference workflow. Training-only packages live in requirements-dev.txt.
+# Updated for Python 3.14 compatibility.
+torch==2.12.0
+transformers==5.10.2
+huggingface_hub==1.18.0
+numpy==2.4.6
