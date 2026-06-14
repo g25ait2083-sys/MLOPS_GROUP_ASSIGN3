@@ -118,9 +118,9 @@ Training pipelines are restricted exclusively to Kaggle infrastructure.
 --------------------------------------------------------------------------------
 Roll Number     | Contributor Name    | Defined Operational Focus Areas
 ----------------|---------------------|-----------------------------------------
-G25ait2083      | Rashmi Kumari       | Repo setup, branch protection, CI/CD triggering (Task 1, 7, 5)
-G25ait2046      | Kanwaldeep Singh    | Data prep, model loading, Docker design (Task 2, 3, 6)
-G25ait2031      | Disha Singhania     | Kaggle training runs, W&B experiment tracking (Task 4, 8)
+G25ait2083      | Rashmi Kumari       | Repo setup, branch protection, CI/CD triggering, Hugging Face model registry, report (Task 1, 7, 5)
+G25ait2046      | Kanwaldeep Singh    | Data prep + model loading + inference + Dockerfile + CI/inference workflows (Task 2, 3, 6)
+G25ait2031      | Disha Singhania     | Kaggle training runs co-authoring & execution, W&B logging & dashboard setup, release merging, GitHub Actions workflow execution, report (Task 4, 8, 7)
 
 *Note: All development must be traceable to individual contributions via the commit graph. 
 Developers are required to implement features on a dedicated branch, pushing to 
